@@ -7,4 +7,8 @@ import java.util.List;
 public interface EmployeeService {
 
     List<Employees> findAll();
+
+    Employees findById(Integer id);
+
+    String addNewEmployee(Employees employees);
 }
