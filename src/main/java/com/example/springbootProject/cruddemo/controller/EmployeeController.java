@@ -27,19 +27,43 @@ public class EmployeeController {
     //retrieve employee by id
     @GetMapping("/employee/{employeeId}")
     public Employees getEmployeeById(@PathVariable  int employeeId){
-        return employeeService.findById(employeeId);
+        Employees employee = employeeService.findById(employeeId);
+
+        if(employee == null){
+            throw new RuntimeException("Employee id not found: "+ employeeId);
+        }
+
+        return employee;
     }
 
-    //save employee
+    //create employee
     @PostMapping("/employee")
-    public Employees addEmployee(@PathVariable  String firstName, @PathVariable  String lastName,@PathVariable  String email){
-        Employees employee = new Employees(firstName,lastName,email);
+    public Employees addEmployee(@RequestBody Employees employee){
+        // make id of employee to 0 because for id = 0 merge create new entry
+        employee.setId(0);
+
+        return employeeService.save(employee);
+    }
+
+    // update employee
+    @PutMapping("/employee")
+    public Employees updateEmployee(@RequestBody Employees employee){
+
         return employeeService.save(employee);
     }
 
     //delete employee
     @DeleteMapping("/employee/{employeeId}")
-    public void removeEmployeeDetails(@PathVariable Integer employeeId){
+    public String removeEmployeeDetails(@PathVariable Integer employeeId){
+
+        Employees employee = employeeService.findById(employeeId);
+
+        if(employee==null){
+            throw new RuntimeException("Employee id not found: "+ employeeId);
+        }
+
         employeeService.deleteById(employeeId);
+
+        return "Deleted employee id: "+ employeeId;
     }
 }
