@@ -11,4 +11,8 @@ public interface EmployeeService {
     Employees findById(Integer id);
 
     String addNewEmployee(Employees employees);
+
+    String updateEmployee(Employees employees);
+
+    void deleteEmployee(Integer employeeId);
 }

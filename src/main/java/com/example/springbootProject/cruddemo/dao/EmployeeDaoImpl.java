@@ -45,6 +45,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
+    //update employee data
+    @Override
+    public String updateEmployee(Employees employees) {
+        return null;
+    }
+
+
+    //delete employee data
+    @Override
+    public void deleteEmployee(Integer employeeId) {
+       Employees employee =  entityManager.find(Employees.class,employeeId);
+       if(employee!=null){
+           entityManager.remove(employee);
+       }
+
+    }
 
 
 }

@@ -36,4 +36,12 @@ public class EmployeeController {
         Employees employee = new Employees(firstName,lastName,email);
         return employeeService.addNewEmployee(employee);
     }
+
+    //update employee
+
+    //delete employee
+    @DeleteMapping("/employee/{employeeId}")
+    public void removeEmployeeDetails(@PathVariable Integer employeeId){
+        employeeService.deleteEmployee(employeeId);
+    }
 }
