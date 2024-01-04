@@ -30,18 +30,16 @@ public class EmployeeController {
         return employeeService.findById(employeeId);
     }
 
-    //add employee
-    @PostMapping("/employee/add")
-    public String addEmployee(@PathVariable  String firstName, @PathVariable  String lastName,@PathVariable  String email){
+    //save employee
+    @PostMapping("/employee")
+    public Employees addEmployee(@PathVariable  String firstName, @PathVariable  String lastName,@PathVariable  String email){
         Employees employee = new Employees(firstName,lastName,email);
-        return employeeService.addNewEmployee(employee);
+        return employeeService.save(employee);
     }
-
-    //update employee
 
     //delete employee
     @DeleteMapping("/employee/{employeeId}")
     public void removeEmployeeDetails(@PathVariable Integer employeeId){
-        employeeService.deleteEmployee(employeeId);
+        employeeService.deleteById(employeeId);
     }
 }

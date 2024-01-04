@@ -23,14 +23,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     // retrieve data of all employees
     @Override
-    public List<Employees> getAllEmployees() {
+    public List<Employees> findAll() {
         TypedQuery<Employees> theQuery = entityManager.createQuery(" from Employees",Employees.class);
          return theQuery.getResultList();
     }
 
     // retrieve data of one employee
     @Override
-    public Employees getEmployee(Integer id) {
+    public Employees findById(Integer id) {
         Employees employee = entityManager.find(Employees.class, id);
 
         return employee;
@@ -38,23 +38,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Transactional
     // add data into database
-    public String addEmployee(Employees employees){
-        entityManager.persist(employees);
-
-        return "Employee added successfully!!!";
+    public Employees save(Employees employees){
+       return  entityManager.merge(employees);
     }
-
-
-    //update employee data
-    @Override
-    public String updateEmployee(Employees employees) {
-        return null;
-    }
-
 
     //delete employee data
     @Override
-    public void deleteEmployee(Integer employeeId) {
+    public void deleteById(Integer employeeId) {
        Employees employee =  entityManager.find(Employees.class,employeeId);
        if(employee!=null){
            entityManager.remove(employee);

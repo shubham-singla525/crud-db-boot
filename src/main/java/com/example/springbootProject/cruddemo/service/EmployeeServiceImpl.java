@@ -22,29 +22,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     // find all employees
     @Override
     public List<Employees> findAll() {
-        return employeeDao.getAllEmployees();
+        return employeeDao.findAll();
     }
 
     //find employee by id
     @Override
     public Employees findById(Integer id) {
-        return  employeeDao.getEmployee(id);
+        return  employeeDao.findById(id);
     }
 
+    // save employee
+    @Transactional
     @Override
-    public String addNewEmployee(Employees employees) {
-        return employeeDao.addEmployee(employees);
+    public Employees save(Employees employees) {
+        return employeeDao.save(employees);
     }
 
-    @Override
-    public String updateEmployee(Employees employees) {
-        return null;
-    }
 
     // delete employee
     @Transactional
     @Override
-    public void deleteEmployee(Integer employeeId) {
-        employeeDao.deleteEmployee(employeeId);
+    public void deleteById(Integer employeeId) {
+        employeeDao.deleteById(employeeId);
     }
 }
